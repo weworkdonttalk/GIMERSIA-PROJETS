@@ -1,0 +1,44 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://entities/mechanics/ParadoxGate.gd" id="1_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(24, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trigger"]
+size = Vector2(40, 104)
+
+[node name="ParadoxGate" type="StaticBody2D"]
+collision_layer = 1
+collision_mask = 0
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="VisualRect" type="ColorRect" parent="."]
+offset_left = -12.0
+offset_top = -48.0
+offset_right = 12.0
+offset_bottom = 48.0
+color = Color(0.25, 0.18, 0.35, 1)
+
+[node name="Border" type="ReferenceRect" parent="."]
+offset_left = -12.0
+offset_top = -48.0
+offset_right = 12.0
+offset_bottom = 48.0
+border_color = Color(0.75, 0.45, 0.95, 1)
+border_width = 2.0
+editor_only = false
+
+[node name="LockIcon" type="Polygon2D" parent="."]
+color = Color(0.980392, 0.8, 0.0823529, 1)
+polygon = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+
+[node name="TriggerArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
+shape = SubResource("RectangleShape2D_trigger")

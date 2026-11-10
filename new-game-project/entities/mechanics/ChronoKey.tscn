@@ -1,0 +1,28 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://entities/mechanics/ChronoKey.gd" id="1_script"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 16.0
+
+[node name="ChronoKey" type="Area2D"]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="KeyRing" type="Polygon2D" parent="Visual"]
+color = Color(0.980392, 0.8, 0.0823529, 1)
+polygon = PackedVector2Array(-8, -12, 8, -12, 12, -4, 8, 4, -8, 4, -12, -4)
+
+[node name="KeyShaft" type="Polygon2D" parent="Visual"]
+color = Color(0.980392, 0.8, 0.0823529, 1)
+polygon = PackedVector2Array(-3, 4, 3, 4, 3, 16, 7, 16, 7, 13, 3, 13, 3, 8, -3, 8)
+
+[node name="Glow" type="Polygon2D" parent="Visual"]
+color = Color(0.219608, 0.741176, 0.972549, 1)
+polygon = PackedVector2Array(0, -8, 4, -4, 0, 0, -4, -4)

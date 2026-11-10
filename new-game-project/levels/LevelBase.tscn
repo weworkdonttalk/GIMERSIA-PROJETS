@@ -1,0 +1,100 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://levels/LevelBase.gd" id="1_script"]
+[ext_resource type="Script" path="res://entities/mechanics/TimelineContainer.gd" id="2_timeline"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_top"]
+size = Vector2(1152, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bottom"]
+size = Vector2(1152, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_left"]
+size = Vector2(32, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_right"]
+size = Vector2(32, 648)
+
+[node name="LevelBase" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.18, 0.14, 0.1, 1)
+
+[node name="BorderVisual" type="ReferenceRect" parent="."]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 1120.0
+offset_bottom = 616.0
+border_color = Color(0.35, 0.3, 0.25, 1)
+border_width = 3.0
+editor_only = false
+
+[node name="AlwaysActiveMap" type="Node2D" parent="."]
+
+[node name="WorldBounds" type="StaticBody2D" parent="AlwaysActiveMap"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="AlwaysActiveMap/WorldBounds"]
+position = Vector2(576, 16)
+shape = SubResource("RectangleShape2D_top")
+
+[node name="Bottom" type="CollisionShape2D" parent="AlwaysActiveMap/WorldBounds"]
+position = Vector2(576, 632)
+shape = SubResource("RectangleShape2D_bottom")
+
+[node name="Left" type="CollisionShape2D" parent="AlwaysActiveMap/WorldBounds"]
+position = Vector2(16, 324)
+shape = SubResource("RectangleShape2D_left")
+
+[node name="Right" type="CollisionShape2D" parent="AlwaysActiveMap/WorldBounds"]
+position = Vector2(1136, 324)
+shape = SubResource("RectangleShape2D_right")
+
+[node name="PastTimelineMap" type="Node2D" parent="."]
+script = ExtResource("2_timeline")
+timeline_type = "PAST"
+
+[node name="FutureTimelineMap" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.12)
+script = ExtResource("2_timeline")
+timeline_type = "FUTURE"
+
+[node name="FlashOverlay" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(1, 1, 1, 0.5)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 88.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 38
+theme_override_constants/margin_right = 48
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer"]
+layout_mode = 2
+
+[node name="DimensionLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "TIMELINE: PAST (WARM MEMORY) [ACTIVE]"
+
+[node name="GravityLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "GRAVITY: DOWN (Floor)"
+
+[node name="KeyLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "CHRONO-KEY: NONE"
+
+[node name="ControlsLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "A/D: Move | W/S: Climb Walls | SPACE: Jump | SHIFT/E: Switch Time | R: Restart"
