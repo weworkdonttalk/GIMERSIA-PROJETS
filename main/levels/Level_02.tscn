@@ -1,0 +1,158 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://levels/LevelBase.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://entities/player/Player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://entities/mechanics/StaticPlatform.tscn" id="3_platform"]
+[ext_resource type="PackedScene" path="res://entities/mechanics/GravityBlock.tscn" id="4_grav_block"]
+[ext_resource type="PackedScene" path="res://entities/mechanics/Hazard.tscn" id="5_hazard"]
+[ext_resource type="PackedScene" path="res://entities/mechanics/GoalDoor.tscn" id="6_goal"]
+[ext_resource type="PackedScene" path="res://entities/mechanics/ChronoKey.tscn" id="7_key"]
+[ext_resource type="PackedScene" path="res://entities/mechanics/ParadoxGate.tscn" id="8_gate"]
+[ext_resource type="PackedScene" path="res://entities/mechanics/TemporalZone.tscn" id="9_zone"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spawn"]
+size = Vector2(160, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_center_barrier"]
+size = Vector2(24, 260)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_top_barrier"]
+size = Vector2(24, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_goal_floor"]
+size = Vector2(160, 24)
+
+[node name="Level_02" instance=ExtResource("1_base")]
+
+[node name="SpawnFloor" type="StaticBody2D" parent="AlwaysActiveMap" index="1"]
+position = Vector2(110, 606)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlwaysActiveMap/SpawnFloor"]
+shape = SubResource("RectangleShape2D_spawn")
+
+[node name="ColorRect" type="ColorRect" parent="AlwaysActiveMap/SpawnFloor"]
+offset_left = -80.0
+offset_top = -12.0
+offset_right = 80.0
+offset_bottom = 12.0
+color = Color(0.24, 0.28, 0.35, 1)
+
+[node name="CenterBarrier" type="StaticBody2D" parent="AlwaysActiveMap" index="2"]
+position = Vector2(560, 440)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlwaysActiveMap/CenterBarrier"]
+shape = SubResource("RectangleShape2D_center_barrier")
+
+[node name="ColorRect" type="ColorRect" parent="AlwaysActiveMap/CenterBarrier"]
+offset_left = -12.0
+offset_top = -130.0
+offset_right = 12.0
+offset_bottom = 130.0
+color = Color(0.24, 0.28, 0.35, 1)
+
+[node name="TopBarrier" type="StaticBody2D" parent="AlwaysActiveMap" index="3"]
+position = Vector2(560, 110)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlwaysActiveMap/TopBarrier"]
+shape = SubResource("RectangleShape2D_top_barrier")
+
+[node name="ColorRect" type="ColorRect" parent="AlwaysActiveMap/TopBarrier"]
+offset_left = -12.0
+offset_top = -80.0
+offset_right = 12.0
+offset_bottom = 80.0
+color = Color(0.24, 0.28, 0.35, 1)
+
+[node name="GoalFloor" type="StaticBody2D" parent="AlwaysActiveMap" index="4"]
+position = Vector2(1040, 606)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlwaysActiveMap/GoalFloor"]
+shape = SubResource("RectangleShape2D_goal_floor")
+
+[node name="ColorRect" type="ColorRect" parent="AlwaysActiveMap/GoalFloor"]
+offset_left = -80.0
+offset_top = -12.0
+offset_right = 80.0
+offset_bottom = 12.0
+color = Color(0.24, 0.28, 0.35, 1)
+
+[node name="SpikesBottom1" parent="AlwaysActiveMap" index="5" instance=ExtResource("5_hazard")]
+position = Vector2(240, 610)
+
+[node name="SpikesBottom2" parent="AlwaysActiveMap" index="6" instance=ExtResource("5_hazard")]
+position = Vector2(288, 610)
+
+[node name="SpikesBottom3" parent="AlwaysActiveMap" index="7" instance=ExtResource("5_hazard")]
+position = Vector2(336, 610)
+
+[node name="SpikesBottom4" parent="AlwaysActiveMap" index="8" instance=ExtResource("5_hazard")]
+position = Vector2(384, 610)
+
+[node name="SpikesBottom5" parent="AlwaysActiveMap" index="9" instance=ExtResource("5_hazard")]
+position = Vector2(432, 610)
+
+[node name="GoalDoor" parent="AlwaysActiveMap" index="10" instance=ExtResource("6_goal")]
+position = Vector2(1060, 570)
+
+[node name="Player" parent="AlwaysActiveMap" index="11" instance=ExtResource("2_player")]
+position = Vector2(80, 570)
+
+[node name="ChronoKey" parent="PastTimelineMap" index="0" instance=ExtResource("7_key")]
+position = Vector2(100, 480)
+max_switches = 2
+
+[node name="PastPlatform1" parent="PastTimelineMap" index="1" instance=ExtResource("3_platform")]
+position = Vector2(240, 520)
+size = Vector2(90, 20)
+fill_color = Color(0.85, 0.72, 0.42, 1)
+border_color = Color(1, 0.88, 0.5, 1)
+
+[node name="TemporalZone" parent="PastTimelineMap" index="2" instance=ExtResource("9_zone")]
+position = Vector2(360, 440)
+zone_size = Vector2(130, 160)
+
+[node name="PastPlatform2" parent="PastTimelineMap" index="3" instance=ExtResource("3_platform")]
+position = Vector2(460, 440)
+size = Vector2(80, 20)
+fill_color = Color(0.85, 0.72, 0.42, 1)
+border_color = Color(1, 0.88, 0.5, 1)
+
+[node name="PastGravityRight" parent="PastTimelineMap" index="4" instance=ExtResource("4_grav_block")]
+position = Vector2(480, 380)
+direction = "RIGHT"
+
+[node name="PastCorridorSpikes" parent="PastTimelineMap" index="5" instance=ExtResource("5_hazard")]
+position = Vector2(560, 235)
+rotation = 1.5708
+
+[node name="PastCeilingSpikes" parent="PastTimelineMap" index="6" instance=ExtResource("5_hazard")]
+position = Vector2(800, 40)
+rotation = 3.14159
+
+[node name="FuturePlatform1" parent="FutureTimelineMap" index="0" instance=ExtResource("3_platform")]
+position = Vector2(280, 460)
+size = Vector2(90, 20)
+fill_color = Color(0.3, 0.25, 0.4, 1)
+border_color = Color(0.65, 0.5, 0.85, 1)
+
+[node name="FuturePlatform2" parent="FutureTimelineMap" index="1" instance=ExtResource("3_platform")]
+position = Vector2(750, 260)
+size = Vector2(120, 20)
+fill_color = Color(0.3, 0.25, 0.4, 1)
+border_color = Color(0.65, 0.5, 0.85, 1)
+
+[node name="FutureGravityDown" parent="FutureTimelineMap" index="2" instance=ExtResource("4_grav_block")]
+position = Vector2(850, 260)
+direction = "DOWN"
+
+[node name="ParadoxGate" parent="FutureTimelineMap" index="3" instance=ExtResource("8_gate")]
+position = Vector2(960, 540)
+gate_size = Vector2(24, 110)

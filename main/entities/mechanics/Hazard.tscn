@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://entities/mechanics/Hazard.gd" id="1_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(46, 12)
+
+[node name="Hazard" type="Area2D"]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_1")
+
+[node name="SpikesVisual" type="Polygon2D" parent="."]
+color = Color(0.937255, 0.266667, 0.266667, 1)
+polygon = PackedVector2Array(-24, 8, -16, -8, -8, 8, 0, -8, 8, 8, 16, -8, 24, 8)

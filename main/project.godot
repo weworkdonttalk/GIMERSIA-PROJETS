@@ -10,18 +10,20 @@ config_version=5
 
 [application]
 
-config/name="New Game Project"
+config/name="Dimension Shift & Gravity"
+run/main_scene="res://levels/Level_01.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+EventBus="*res://autoloads/EventBus.gd"
+GameManager="*res://autoloads/GameManager.gd"
 
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-
-[dotnet]
-
-project/assembly_name="New Game Project"
 
 [physics]
 
