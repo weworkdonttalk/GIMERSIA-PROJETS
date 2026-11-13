@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://bcillh10tly15"]
+
+[ext_resource type="Script" uid="uid://b2hurry5f43xo" path="res://mc.gd" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://b88gn8kt7248s" path="res://world.gd" id="1_fj7yv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q4lci"]
+albedo_color = Color(0.43519226, 0.4351923, 0.43519217, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_htemk"]
+material = SubResource("StandardMaterial3D_q4lci")
+size = Vector3(8, 1, 25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_14cdr"]
+size = Vector3(8, 1, 25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_14cdr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_htemk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_htemk"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_14cdr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pj0hq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q4lci"]
+
+[node name="World" type="Node3D" unique_id=1275979164]
+script = ExtResource("1_fj7yv")
+
+[node name="remembered" type="Node3D" parent="." unique_id=400882493]
+
+[node name="Lantai" type="StaticBody3D" parent="remembered" unique_id=697340876]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="remembered/Lantai" unique_id=846209572]
+mesh = SubResource("BoxMesh_htemk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="remembered/Lantai" unique_id=381413152]
+shape = SubResource("BoxShape3D_14cdr")
+
+[node name="blok" type="StaticBody3D" parent="remembered" unique_id=1071631340]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7679517, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="remembered/blok" unique_id=1419325357]
+mesh = SubResource("BoxMesh_14cdr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="remembered/blok" unique_id=1049837743]
+shape = SubResource("BoxShape3D_htemk")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=517316396]
+transform = Transform3D(-4.1844086e-08, -0.28915912, 0.95728105, -1.2639546e-08, 0.95728105, 0.28915912, -1, 8.881784e-16, -4.3711392e-08, 5.7607293, 2.7375627, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1389362972]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.9975624, 0)
+light_energy = 3.984
+
+[node name="mc" type="CharacterBody3D" parent="." unique_id=809847032]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9082117, 5.336237)
+script = ExtResource("1_f3sb7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="mc" unique_id=939743404]
+shape = SubResource("CapsuleShape3D_htemk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="mc" unique_id=835330022]
+mesh = SubResource("CapsuleMesh_14cdr")
+
+[node name="forgotten" type="Node3D" parent="." unique_id=130517645]
+
+[node name="blokk" type="StaticBody3D" parent="forgotten" unique_id=489185165]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2279482, -1.4069088)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="forgotten/blokk" unique_id=449548614]
+mesh = SubResource("BoxMesh_pj0hq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="forgotten/blokk" unique_id=2109492022]
+shape = SubResource("BoxShape3D_q4lci")
