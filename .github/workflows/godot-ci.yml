@@ -1,0 +1,26 @@
+name: Godot CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.3-stable
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run Game Systems Test
+        run: |
+          cd main
+          godot --headless res://tests/TestRunner.tscn
+
+      - name: Verify Scene Loading
+        run: |
+          cd main
+          godot --headless --quit

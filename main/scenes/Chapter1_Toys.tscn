@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/ChapterController3D.gd" id="1_chapter"]
+[ext_resource type="Script" path="res://scripts/RealityManager.gd" id="2_reality"]
+[ext_resource type="PackedScene" path="res://scenes/Player3D.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/HUD.tscn" id="4_hud"]
+[ext_resource type="Script" path="res://scripts/MemoryFragment3D.gd" id="5_fragment"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(20, 1, 20)
+
+[node name="Chapter1_Toys" type="Node3D"]
+script = ExtResource("1_chapter")
+
+[node name="RealityManager" type="Node3D" parent="." node_paths=PackedStringArray("remembered_node", "forgotten_node")]
+script = ExtResource("2_reality")
+remembered_node = NodePath("../RememberedWorld")
+forgotten_node = NodePath("../ForgottenWorld")
+
+[node name="RememberedWorld" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="RememberedWorld"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RememberedWorld/Floor"]
+mesh = SubResource("BoxMesh_floor")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RememberedWorld/Floor"]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="ToyFragment" type="Area3D" parent="RememberedWorld"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -5)
+script = ExtResource("5_fragment")
+fragment_id = "toy_fragment"
+
+[node name="ForgottenWorld" type="Node3D" parent="."]
+
+[node name="Player3D" parent="." instance=ExtResource("3_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 5)
+
+[node name="SpawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 5)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 6, 12)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 0)
+light_energy = 2.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("4_hud")]
